@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>易經卜卦</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1>易經卜卦</h1>
+      <p class="subtitle">靜心想好一個問題，擲六次銅錢，看看易經怎麼說。</p>
+    </header>
+
+    <!-- 第一步：提問 -->
+    <section class="card">
+      <h2>一、寫下你的問題</h2>
+      <textarea id="question" rows="3" placeholder="例如：這次換工作順利嗎？"></textarea>
+    </section>
+
+    <!-- 第二步：擲銅錢起卦 -->
+    <section class="card">
+      <h2>二、擲銅錢起卦</h2>
+      <p class="help">每次擲三枚銅錢，正面算 3、反面算 2。擲六次，由下往上排成一卦；紅色的是會變化的「變爻」。</p>
+      <div id="coins" class="coins"></div>
+      <div id="lines" class="lines big"></div>
+      <div class="buttons">
+        <button id="toss-btn" class="primary">擲銅錢</button>
+        <button id="reset-btn" class="secondary">重新開始</button>
+      </div>
+    </section>
+
+    <!-- 第三步：卦象解釋（擲完六次才會出現，內容由 app.js 填入） -->
+    <section id="result" class="card" hidden></section>
+
+    <!-- 歷史紀錄（內容由 app.js 填入） -->
+    <section class="card">
+      <div class="history-header">
+        <h2>歷史紀錄</h2>
+        <button id="clear-btn" class="link">全部清除</button>
+      </div>
+      <p id="history-empty" class="help">還沒有紀錄。完成一次占卜後會自動存在這裡。</p>
+      <div id="history-list"></div>
+    </section>
+  </main>
+
+  <!-- 先載入資料，再載入程式，順序不能顛倒 -->
+  <script src="hexagrams.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

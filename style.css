@@ -1,0 +1,346 @@
+/* 易經卜卦：外觀樣式 */
+
+/* 顏色集中在這裡，想換配色只要改這幾行 */
+:root {
+  --paper: #f5efe3;   /* 頁面背景：米色紙張 */
+  --card: #fffcf5;    /* 卡片底色 */
+  --ink: #2d2620;     /* 主要文字、爻線 */
+  --muted: #80735f;   /* 次要文字 */
+  --border: #e2d6c0;  /* 邊框 */
+  --red: #b0392b;     /* 變爻 */
+  --accent: #7a4e24;  /* 按鈕 */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 讓 HTML 的 hidden 屬性一定有效（不會被下面的 display 設定蓋掉） */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif TC", "Source Han Serif TC", "PMingLiU", "Songti TC", serif;
+  line-height: 1.7;
+}
+
+/* ===== 版面 ===== */
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  letter-spacing: 0.3em;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+}
+
+.help {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ===== 問題輸入框 ===== */
+
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  resize: vertical;
+}
+
+textarea:disabled {
+  color: var(--muted);
+  background: var(--paper);
+}
+
+/* ===== 按鈕 ===== */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+button {
+  font: inherit;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary {
+  color: #fff;
+  background: var(--accent);
+  border: none;
+}
+
+.secondary {
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+}
+
+/* 看起來像文字連結的小按鈕（例如「全部清除」） */
+.link {
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  background: none;
+  border: none;
+}
+
+/* ===== 銅錢 ===== */
+
+.coins {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 52px;
+  margin-bottom: 16px;
+}
+
+.coins .help {
+  margin: 0;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-weight: bold;
+  border: 2px solid #b08a3e;
+  border-radius: 50%;
+}
+
+.coin.heads {
+  background: #e8c872;
+}
+
+.coin.tails {
+  color: var(--muted);
+  background: #ddd2bb;
+}
+
+.coin-sum {
+  margin-left: 6px;
+}
+
+/* ===== 爻線 ===== */
+/* 陽爻 = 一條長線（一個 span）；陰爻 = 中間斷開（兩個 span） */
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+  height: 14px;
+}
+
+.line span {
+  width: 100%;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.line.yin span {
+  width: 43%;
+}
+
+.line.changing span {
+  background: var(--red);
+}
+
+/* 還沒擲到的位置：虛線框 */
+.line.empty {
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+}
+
+/* 大卦圖：左邊是爻名（初九），中間是爻線，右邊是擲出的結果（老陽） */
+.lines.big .line-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 1fr;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.line-label,
+.line-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.line-label {
+  text-align: right;
+}
+
+.line-note.changing {
+  color: var(--red);
+}
+
+/* 小卦圖：本卦、變卦卡片裡 */
+.lines.small {
+  gap: 5px;
+}
+
+.lines.small .line {
+  width: 64px;
+  height: 7px;
+}
+
+/* ===== 卦象解釋 ===== */
+
+.asked {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+}
+
+.hex-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hex-card {
+  min-width: 110px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.hex-card-title,
+.hex-card-number {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.hex-card-title {
+  margin-bottom: 8px;
+}
+
+.hex-card-name {
+  margin-top: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.arrow {
+  color: var(--muted);
+  font-size: 1.5rem;
+}
+
+.hint {
+  padding: 8px 12px;
+  background: var(--paper);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+}
+
+.text-block h3 {
+  margin: 20px 0 6px;
+  font-size: 1.05rem;
+}
+
+.text-block p {
+  margin: 0 0 8px;
+}
+
+/* 易經原文用粗體，跟白話說明區分 */
+.classic {
+  font-weight: bold;
+}
+
+.classic.changing {
+  color: var(--red);
+}
+
+/* ===== 歷史紀錄 ===== */
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.history-item {
+  border-top: 1px solid var(--border);
+}
+
+.history-item summary {
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.history-hex {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.history-date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.history-body {
+  padding-bottom: 16px;
+}
